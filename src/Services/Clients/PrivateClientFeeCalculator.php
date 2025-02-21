@@ -13,9 +13,6 @@ use App\Utils\ExchangeRate;
  */
 class PrivateClientFeeCalculator extends BaseClientFeeCalculator
 {
-    // Commission fee rate for private clients (0.3%)
-    private const COMMISSION_RATE = 0.003;
-
     // Keep track of weekly withdrawals for each user in a specific week
     private array $weeklyWithdrawals = [];
 
@@ -61,12 +58,12 @@ class PrivateClientFeeCalculator extends BaseClientFeeCalculator
                 return 0.0; // No fee charged
             } else {
                 // Partial free amount, charge the excess
-                $feeInEur = ($amountInEur - $remainingFreeAmount) * self::COMMISSION_RATE;
+                $feeInEur = ($amountInEur - $remainingFreeAmount) * self::COMMISSION_PRIVATE_RATE;
                 $weeklyData['total'] += $remainingFreeAmount; // Add the free part
             }
         } else {
             // All withdrawals after the 3 free transactions are charged fully
-            $feeInEur = $amountInEur * self::COMMISSION_RATE;
+            $feeInEur = $amountInEur * self::COMMISSION_PRIVATE_RATE;
         }
 
         // Update the user's weekly data
