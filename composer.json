@@ -1,5 +1,5 @@
 {
-    "name": "Commission calculator",
+    "name": "lenovo/commission-calculator-dev",
     "description": "A PHP-based commission fee calculator for deposits and withdrawals using real-time exchange rates.",
     "type": "project",
     "autoload": {
