@@ -17,8 +17,8 @@ A PHP application that calculates **commission fees** for deposits and withdrawa
 
 ### **1. Clone the Repository**
 ```sh
-git clone https://github.com/your-repo/commission-calculator.git
-cd commission-calculator
+git clone https://github.com/georgiangelov2000/commission-calculator-dev.git
+cd commission-calculator-dev
 ```
 
 ### **2. Install Dependencies**
