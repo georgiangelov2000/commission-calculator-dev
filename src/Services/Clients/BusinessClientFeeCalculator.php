@@ -21,6 +21,6 @@ class BusinessClientFeeCalculator extends BaseClientFeeCalculator {
      * @return float The commission fee.
      */
     public function calculateFee(float $amount, string $currency, int $userId, string $date): float {
-        return CurrencyFormatter::round($amount * 0.005, $currency);
+        return CurrencyFormatter::round($amount * self::COMMISSION_BUSINESS_RATE, $currency);
     }
 }

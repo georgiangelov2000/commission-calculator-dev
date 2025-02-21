@@ -10,6 +10,10 @@ use App\Interfaces\FeeCalculatorInterface;
  */
 abstract class BaseClientFeeCalculator implements FeeCalculatorInterface
 {
+    protected const COMMISSION_PRIVATE_RATE = 0.003;
+    protected const COMMISSION_BUSINESS_RATE = 0.005;
+    protected const MAX_WITHDRAWAL_LIMIT = 1000;
+
       /**
      * Abstract method that must be implemented in derived classes.
      *

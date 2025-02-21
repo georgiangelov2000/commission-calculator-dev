@@ -39,17 +39,17 @@ class PrivateClientFeeCalculator extends BaseClientFeeCalculator
         }
                 
         // Free withdrawals check (up to 1000 EUR, first 3 transactions)
-        if ($this->weeklyWithdrawals[$weekKey]['count'] < 3 && $this->weeklyWithdrawals[$weekKey]['total'] + $amountInEur <= 1000) {
-            $this->weeklyWithdrawals[$weekKey]['total'] += $amount;
+        if ($this->weeklyWithdrawals[$weekKey]['count'] < 3 && $this->weeklyWithdrawals[$weekKey]['total'] + $amountInEur <= self::MAX_WITHDRAWAL_LIMIT) {
+            $this->weeklyWithdrawals[$weekKey]['total'] += $amountInEur;
             $this->weeklyWithdrawals[$weekKey]['count']++;
             return 0;
         }
                
         // If limit exceeded, only charge for the excess amount
-        $excessAmount = max(0, ($this->weeklyWithdrawals[$weekKey]['total'] + $amountInEur) - 1000);
-        $feeInEur = ($excessAmount > 0) ? $excessAmount * 0.003 : 0;
+        $excessAmount = max(0, ($this->weeklyWithdrawals[$weekKey]['total'] + $amountInEur) - self::MAX_WITHDRAWAL_LIMIT);
+        $feeInEur = ($excessAmount > 0) ? $excessAmount * self::COMMISSION_PRIVATE_RATE : 0;
 
-        $this->weeklyWithdrawals[$weekKey]['total'] += $amount;
+        $this->weeklyWithdrawals[$weekKey]['total'] += $amountInEur;
         $this->weeklyWithdrawals[$weekKey]['count']++;
 
         // Convert fee back to original currency
