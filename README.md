@@ -56,7 +56,7 @@ php script.php input.csv
 commission-calculator/
 ├── src/
 |   ├── Abstract/             # Abstract classes
-│   │   ├── BaseClientFeeCalculator.php # This file (Parent class for fee calculation)
+│   │   ├── BaseClienBaseClientFeeCalculatortFeeCalculator.php # This file (Parent class for fee calculation)
 │   ├── Models/               # Data models
 │   │   ├── Transaction.php
 │   ├── Interfaces/           # Interface definitions
@@ -88,6 +88,9 @@ EUR:JPY - 1:129.53
 However, since this project fetches live exchange rates from the API, the results will vary depending on the current market rates.
 
 ## 📈 Code Explanation
+
+### **0. Abstract**
+- `BaseClientFeeCalculator.php` → This file (Parent class for fee calculation)
 
 ### **1. Models**
 - `Transaction.php` → Represents a financial transaction.
