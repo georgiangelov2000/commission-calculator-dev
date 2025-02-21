@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+    <php>
+        <!-- Add any environment variables you need -->
+        <env name="CSV_FILE" value="./input.csv" />
+    </php>
+
+    <testsuites>
+        <testsuite name="Commission Calculator Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
