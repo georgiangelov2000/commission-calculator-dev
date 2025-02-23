@@ -17,7 +17,7 @@ class ExchangeRate {
     private function __construct() {}
 
     /**
-     * Load exchange rates from Paysera API if not cached.
+     * Load exchange rates from Paysera API
      */
     private static function loadRates(): void {
         if (empty(self::$rates)) {
