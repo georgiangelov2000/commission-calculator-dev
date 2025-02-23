@@ -31,7 +31,7 @@ class PrivateClientFeeCalculator extends BaseClientFeeCalculator
      */
     public function calculateFee(float $amount, string $currency, int $userId, string $date): float
     {
-        // Unique key for the user and week (ISO-8601 year and week number)
+        // Unique key for the user and week (year and week number)
         $weekKey = date('oW', strtotime($date)) . '-' . $userId;
 
         // Convert the transaction amount to EUR
@@ -51,6 +51,7 @@ class PrivateClientFeeCalculator extends BaseClientFeeCalculator
         // Free withdrawals logic (within the 3 free transactions and up to 1000 EUR limit)
         if ($weeklyData['count'] < 3) {
             $remainingFreeAmount = max(0, 1000 - $weeklyData['total']);
+            
             if ($amountInEur <= $remainingFreeAmount) {
                 // Transaction is entirely within free limits
                 $weeklyData['total'] += $amountInEur;
@@ -60,6 +61,7 @@ class PrivateClientFeeCalculator extends BaseClientFeeCalculator
                 // Partial free amount, charge the excess
                 $feeInEur = ($amountInEur - $remainingFreeAmount) * self::COMMISSION_PRIVATE_RATE;
                 $weeklyData['total'] += $remainingFreeAmount; // Add the free part
+
             }
         } else {
             // All withdrawals after the 3 free transactions are charged fully
@@ -69,6 +71,7 @@ class PrivateClientFeeCalculator extends BaseClientFeeCalculator
         // Update the user's weekly data
         $weeklyData['total'] += $amountInEur;
         $weeklyData['count']++;
+
 
         // Convert the fee back to the original currency
         $finalFee = ExchangeRate::convertFromEur($feeInEur, $currency);
